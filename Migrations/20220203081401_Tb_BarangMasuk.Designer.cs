@@ -2,14 +2,16 @@
 using Inventory1.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Inventory1.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220203081401_Tb_BarangMasuk")]
+    partial class Tb_BarangMasuk
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -116,7 +118,7 @@ namespace Inventory1.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("KodeBarang")
-                        .HasColumnType("varchar(767)");
+                        .HasColumnType("text");
 
                     b.Property<string>("NamaBarang")
                         .HasColumnType("text");
@@ -125,8 +127,6 @@ namespace Inventory1.Migrations
                         .HasColumnType("text");
 
                     b.HasKey("Id_Masuk");
-
-                    b.HasIndex("KodeBarang");
 
                     b.ToTable("Tb_BarangMasuk");
                 });
@@ -181,15 +181,6 @@ namespace Inventory1.Migrations
                         .HasForeignKey("KodeBarang1");
 
                     b.Navigation("KodeBarang");
-                });
-
-            modelBuilder.Entity("Inventory1.Models.Db_BarangMasuk", b =>
-                {
-                    b.HasOne("Inventory1.Models.DataBarang", "KodeBrg")
-                        .WithMany()
-                        .HasForeignKey("KodeBarang");
-
-                    b.Navigation("KodeBrg");
                 });
 
             modelBuilder.Entity("Inventory1.Models.User", b =>

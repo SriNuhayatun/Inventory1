@@ -1,54 +1,50 @@
-﻿@model BarangMasukForm;
-
+﻿@model BarangKeluar;
 @{
     Layout = "_AdminLayout";
 }
-
-
 <div class="col-md-6 col-12">
     <div class="card">
         <div class="card-header">
-            <h4 class="card-title">Tambah Barang Masuk</h4>
+            <h4 class="card-title">Tambah Data Barang Keluar</h4>
         </div>
         <div class="card-content">
             <div class="card-body">
-                <form asp-controller="BarangMasuk" asp-action="CreateMasuk" class="form form-horizontal">
+                <form asp-action="CreateKeluar" class="form form-horizontal">
                     <div class="form-body">
                         <div class="row">
                             <div class="col-md-4">
-                                <label asp-for="Id_Masuk">ID Masuk</label>
+                                <label asp-for="Id_Keluar">ID Keluar</label>
                             </div>
                             <div class="col-md-8 form-group">
-                                <input asp-for="Id_Masuk" class="form-control"
-                                       placeholder="ID Kategori">
+                                <input asp-for="Id_Keluar" id="first-name" class="form-control"
+                                       placeholder="ID Keluar">
                             </div>
                             <div class="col-md-4">
                                 <label asp-for="KodeBarang">Kode Barang</label>
                             </div>
                             <div class="col-md-8 form-group">
-                                <input asp-for="KodeBarang" class="form-control"
+                                <input asp-for="KodeBarang" id="email-id" class="form-control"
                                        placeholder="Kode Barang">
                             </div>
                             <div class="col-md-4">
                                 <label asp-for="NamaBarang">Nama Barang</label>
                             </div>
                             <div class="col-md-8 form-group">
-                                <input asp-for="NamaBarang" class="form-control"
+                                <input asp-for="NamaBarang" id="first-name" class="form-control"
                                        placeholder="Nama Barang">
-                                <span asp-validation-for="NamaBarang" class="text-danger"></span>
                             </div>
                             <div class="col-md-4">
                                 <label asp-for="Jumlah">Jumlah</label>
                             </div>
                             <div class="col-md-8 form-group">
-                                <input asp-for="Jumlah" class="form-control"
-                                       placeholde="Jumlah">
+                                <input asp-for="Jumlah" id="email-id" class="form-control"
+                                       placeholder="Jumlah">
                             </div>
                             <div class="col-md-4">
                                 <label asp-for="status">Status</label>
                             </div>
                             <div class="col-md-8 form-group">
-                                <input asp-for="status"  class="form-control"
+                                <input asp-for="status" id="email-id" class="form-control"
                                        placeholder="Status">
                             </div>
 

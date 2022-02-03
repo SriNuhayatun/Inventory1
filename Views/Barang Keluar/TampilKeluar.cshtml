@@ -1,13 +1,13 @@
-﻿@model IEnumerable<Db_BarangMasuk>
-
-@{
+﻿@model IEnumerable<BarangKeluar>
+@{ 
     Layout = "_AdminLayout";
 }
+
 <section class="section">
     <div class="card">
         <div class="card-header">
             <P>Data Barang Masuk</P>
-            <a asp-action="CreateMasuk">Tambah</a>
+            <a asp-action="CreateKeluar">Tambah</a>
         </div>
 
         <div class="card-body">
@@ -15,7 +15,7 @@
                 <thead>
                     <tr>
                         <th>
-                            @Html.DisplayNameFor(model => model.Id_Masuk)
+                            @Html.DisplayNameFor(model => model.Id_Keluar)
                         </th>
                         <th>
                             @Html.DisplayNameFor(model => model.KodeBarang)
@@ -36,27 +36,28 @@
                 <tbody>
                     @foreach (var item in Model)
                     {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Id_Masuk)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.KodeBarang)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.NamaBarang)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Jumlah)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.status)
-                        </td>
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Id_Keluar)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.KodeBarang)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.NamaBarang)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Jumlah)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.status)
+                            </td>
 
-                    </tr>
+                        </tr>
                     }
                 </tbody>
             </table>
         </div>
     </div>
 </section>
+
