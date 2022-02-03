@@ -29,7 +29,7 @@ namespace Inventory1.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Create([Bind("")]DataBarang Parameter)//mnerima halaman yg akan diisi(inputan/proses)
+        public async Task<IActionResult> Create(DataBarang Parameter)//mnerima halaman yg akan diisi(inputan/proses)
         {
 
             //proses masukan ke database

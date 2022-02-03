@@ -7,29 +7,25 @@ using System.Threading.Tasks;
 
 namespace Inventory1.Controllers
 {
-    public class DataKategoriController : Controller
+    public class BarangMasukController : Controller
     {
         private readonly AppDbContext _context;
 
-        public DataKategoriController(AppDbContext context)
+        public BarangMasukController(AppDbContext context)
         {
             _context = context;//_Context dimasukan konstruktor agar lebih ringkas
         }
-
-        public IActionResult TampilKategori()
+        public IActionResult TampilMasuk()
         {
-
-            var SemuaBlog = _context.Tb_Kategori.ToList();//sama saja dengan select * from tb_blog
+            var SemuaBlog = _context.Tb_Masuk.ToList();//sama saja dengan select * from tb_blog
             return View(SemuaBlog);
-
         }
-        
-        public IActionResult CreateKategori()
+        public IActionResult CreateMasuk()//UNTUK MENAMPILKAN HALAMAN YANG AKAN DIISI(kolom inputan)
         {
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> CreateKategori(DataKategori Parameter)//mnerima halaman yg akan diisi(inputan/proses)
+        public async Task<IActionResult> CreateMasuk(BarangMasuk Parameter)//mnerima halaman yg akan diisi(inputan/proses)
         {
 
             //proses masukan ke database
@@ -38,7 +34,7 @@ namespace Inventory1.Controllers
                 _context.Add(Parameter);//mengganti dari insert into
                 await _context.SaveChangesAsync();// menyimpan perubahan
 
-                return RedirectToAction("TampilKategori");
+                return RedirectToAction("TampilMasuk");
             }
             return View(Parameter);
 

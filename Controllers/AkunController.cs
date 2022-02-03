@@ -23,12 +23,12 @@ namespace Inventory1.Controllers
         }
 
         [HttpPost]
-        public IActionResult Daftar(User datanya)
+        public async Task<IActionResult> Daftar(User datanya)
         {
             var deklarRole = _context.Tb_Roles.Where(x => x.Id == "1").FirstOrDefault();
             datanya.Roles = deklarRole;
-             _context.Add(datanya);//sama saja dengan insert into tb_User
-             _context.SaveChanges();// eksekusi
+            _context.Add(datanya);//sama saja dengan insert into tb_User
+            await _context.SaveChangesAsync();// eksekusi
 
             //cara 1
             return RedirectToAction("Masuk");//menarik ke action
@@ -54,9 +54,9 @@ namespace Inventory1.Controllers
             var cariusername = _context.Tb_User.Where(bebas =>  //proses pencarian
                                                bebas.Username == datanya.Username
              ).FirstOrDefault();
-            var caripassword = _context.Tb_User.Where(bebas =>  //proses pencarian
-                                               bebas.Password == datanya.Password
-             ).FirstOrDefault();
+            //var caripassword = _context.Tb_User.Where(bebas =>  //proses pencarian
+            //                                   bebas.Password == datanya.Password
+            // ).FirstOrDefault();
 
             if (cariusername != null)
             {
@@ -75,18 +75,20 @@ namespace Inventory1.Controllers
                         new Claim("Username",cariusername.Username),
                         new Claim("Role",cariusername.Roles.Id)
                     };
+
                     //proses daftar auth
                     await HttpContext.SignInAsync(
                         new ClaimsPrincipal(
                             new ClaimsIdentity(daftar, "Cookie", "Username", "Role")
                         )
                    );
+
                     if (cariusername.Roles.Id == "1")//admin
                     {
-                        return RedirectToAction(controllerName: "Blog", actionName: "Index");
+                        return RedirectToAction(controllerName: "Home", actionName: "Index");
                     }
                     //user
-                    return RedirectToAction(controllerName: "Home", actionName: "Privacy");
+                    return RedirectToAction(controllerName: "Akun", actionName: "Daftar");
                 }
                 ViewBag.pesan = "password salah";
                 return View(datanya);

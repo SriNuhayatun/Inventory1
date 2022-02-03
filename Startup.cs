@@ -29,6 +29,14 @@ namespace Inventory1
                 {
                     o.UseMySQL(Configuration.GetConnectionString("mysql"));
                 });
+
+                services.AddAuthentication("CookieAuth")
+                    .AddCookie("CookieAuth", options =>
+                    {
+                        options.LoginPath = "/Akun/Masuk";
+                    }
+                );
+
             services.AddControllersWithViews();
         }
 
@@ -49,6 +57,8 @@ namespace Inventory1
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
