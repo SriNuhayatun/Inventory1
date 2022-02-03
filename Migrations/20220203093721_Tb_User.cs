@@ -2,7 +2,7 @@
 
 namespace Inventory1.Migrations
 {
-    public partial class Inventory : Migration
+    public partial class Tb_User : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,9 +11,9 @@ namespace Inventory1.Migrations
                 columns: table => new
                 {
                     KodeBarang = table.Column<string>(type: "varchar(767)", nullable: false),
-                    Kategori = table.Column<string>(type: "text", nullable: false),
-                    NamaBarang = table.Column<string>(type: "text", nullable: false),
-                    status = table.Column<string>(type: "text", nullable: false),
+                    Kategori = table.Column<string>(type: "text", nullable: true),
+                    NamaBarang = table.Column<string>(type: "text", nullable: true),
+                    status = table.Column<string>(type: "text", nullable: true),
                     Stok = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -26,7 +26,7 @@ namespace Inventory1.Migrations
                 columns: table => new
                 {
                     id_kategori = table.Column<string>(type: "varchar(767)", nullable: false),
-                    Kategori = table.Column<string>(type: "text", nullable: false)
+                    Kategori = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -46,42 +46,42 @@ namespace Inventory1.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Tb_Keluar",
+                name: "Tb_BarangKeluar",
                 columns: table => new
                 {
                     Id_Keluar = table.Column<string>(type: "varchar(767)", nullable: false),
-                    KodeBarang1 = table.Column<string>(type: "varchar(767)", nullable: true),
-                    NamaBarang = table.Column<string>(type: "text", nullable: false),
+                    KodeBarang = table.Column<string>(type: "varchar(767)", nullable: true),
+                    NamaBarang = table.Column<string>(type: "text", nullable: true),
                     Jumlah = table.Column<int>(type: "int", nullable: false),
-                    status = table.Column<string>(type: "text", nullable: false)
+                    status = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Tb_Keluar", x => x.Id_Keluar);
+                    table.PrimaryKey("PK_Tb_BarangKeluar", x => x.Id_Keluar);
                     table.ForeignKey(
-                        name: "FK_Tb_Keluar_Tb_Barang_KodeBarang1",
-                        column: x => x.KodeBarang1,
+                        name: "FK_Tb_BarangKeluar_Tb_Barang_KodeBarang",
+                        column: x => x.KodeBarang,
                         principalTable: "Tb_Barang",
                         principalColumn: "KodeBarang",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Tb_Masuk",
+                name: "Tb_BarangMasuk",
                 columns: table => new
                 {
                     Id_Masuk = table.Column<string>(type: "varchar(767)", nullable: false),
-                    KodeBarang1 = table.Column<string>(type: "varchar(767)", nullable: true),
-                    NamaBarang = table.Column<string>(type: "text", nullable: false),
+                    KodeBarang = table.Column<string>(type: "varchar(767)", nullable: true),
+                    NamaBarang = table.Column<string>(type: "text", nullable: true),
                     Jumlah = table.Column<int>(type: "int", nullable: false),
-                    status = table.Column<string>(type: "text", nullable: false)
+                    status = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Tb_Masuk", x => x.Id_Masuk);
+                    table.PrimaryKey("PK_Tb_BarangMasuk", x => x.Id_Masuk);
                     table.ForeignKey(
-                        name: "FK_Tb_Masuk_Tb_Barang_KodeBarang1",
-                        column: x => x.KodeBarang1,
+                        name: "FK_Tb_BarangMasuk_Tb_Barang_KodeBarang",
+                        column: x => x.KodeBarang,
                         principalTable: "Tb_Barang",
                         principalColumn: "KodeBarang",
                         onDelete: ReferentialAction.Restrict);
@@ -108,14 +108,14 @@ namespace Inventory1.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Tb_Keluar_KodeBarang1",
-                table: "Tb_Keluar",
-                column: "KodeBarang1");
+                name: "IX_Tb_BarangKeluar_KodeBarang",
+                table: "Tb_BarangKeluar",
+                column: "KodeBarang");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Tb_Masuk_KodeBarang1",
-                table: "Tb_Masuk",
-                column: "KodeBarang1");
+                name: "IX_Tb_BarangMasuk_KodeBarang",
+                table: "Tb_BarangMasuk",
+                column: "KodeBarang");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Tb_User_RolesId",
@@ -126,13 +126,13 @@ namespace Inventory1.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "Tb_BarangKeluar");
+
+            migrationBuilder.DropTable(
+                name: "Tb_BarangMasuk");
+
+            migrationBuilder.DropTable(
                 name: "Tb_Kategori");
-
-            migrationBuilder.DropTable(
-                name: "Tb_Keluar");
-
-            migrationBuilder.DropTable(
-                name: "Tb_Masuk");
 
             migrationBuilder.DropTable(
                 name: "Tb_User");

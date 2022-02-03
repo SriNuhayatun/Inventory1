@@ -6,18 +6,16 @@ using System.Threading.Tasks;
 
 namespace Inventory1.Models
 {
-    public class BarangKeluar
+    public class BarangKeluarForm
     {
-        [Key]
         public string Id_Keluar { get; set; }
         [Required]
-        public DataBarang KodeBarang { get; set; }
+        public string KodeBarang { get; set; }
         [Required]
         public string NamaBarang { get; set; }
         [Required]
         public int Jumlah { get; set; }
         [Required]
         public string status { get; set; }
-       
     }
 }

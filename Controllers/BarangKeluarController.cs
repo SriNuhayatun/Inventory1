@@ -17,28 +17,38 @@ namespace Inventory1.Controllers
         }
         public IActionResult TampilKeluar()
         {
-            var SemuaBlog = _context.Tb_Keluar.ToList();//sama saja dengan select * from tb_blog
+            var SemuaBlog = _context.Tb_BarangKeluar.ToList();
+
+
             return View(SemuaBlog);
         }
-        public IActionResult CreateKeluar()
+        public IActionResult CreateKeluar()//UNTUK MENAMPILKAN HALAMAN YANG AKAN DIISI(kolom inputan)
         {
             return View();
         }
-        [HttpPost]
-        public async Task<IActionResult> CreateKeluar(BarangKeluar Parameter)//mnerima halaman yg akan diisi(inputan/proses)
-        {
 
+        [HttpPost]
+        public async Task<IActionResult> CreateKeluar(BarangKeluarForm datanya)//mnerima halaman yg akan diisi(inputan/proses)
+        {
             //proses masukan ke database
             if (ModelState.IsValid)
             {
-                _context.Add(Parameter);//mengganti dari insert into
+                var get = new Db_BarangKeluar
+                {
+                    Id_Keluar = datanya.Id_Keluar,
+                    KodeBarang = datanya.KodeBarang,
+                    NamaBarang = datanya.NamaBarang,
+                    Jumlah = datanya.Jumlah,
+                    status = datanya.status
+                };
+
+                _context.Add(get);//mengganti dari insert into
                 await _context.SaveChangesAsync();// menyimpan perubahan
 
                 return RedirectToAction("TampilKeluar");
             }
-            return View(Parameter);
 
-
+            return View();
         }
     }
 }

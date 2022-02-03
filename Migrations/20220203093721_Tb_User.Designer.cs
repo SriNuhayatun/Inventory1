@@ -8,8 +8,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Inventory1.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220203081401_Tb_BarangMasuk")]
-    partial class Tb_BarangMasuk
+    [Migration("20220203093721_Tb_User")]
+    partial class Tb_User
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -18,76 +18,21 @@ namespace Inventory1.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 64)
                 .HasAnnotation("ProductVersion", "5.0.13");
 
-            modelBuilder.Entity("Inventory1.Models.BarangKeluar", b =>
-                {
-                    b.Property<string>("Id_Keluar")
-                        .HasColumnType("varchar(767)");
-
-                    b.Property<int>("Jumlah")
-                        .HasColumnType("int");
-
-                    b.Property<string>("KodeBarang1")
-                        .HasColumnType("varchar(767)");
-
-                    b.Property<string>("NamaBarang")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("status")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id_Keluar");
-
-                    b.HasIndex("KodeBarang1");
-
-                    b.ToTable("Tb_Keluar");
-                });
-
-            modelBuilder.Entity("Inventory1.Models.BarangMasuk", b =>
-                {
-                    b.Property<string>("Id_Masuk")
-                        .HasColumnType("varchar(767)");
-
-                    b.Property<int>("Jumlah")
-                        .HasColumnType("int");
-
-                    b.Property<string>("KodeBarang1")
-                        .HasColumnType("varchar(767)");
-
-                    b.Property<string>("NamaBarang")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("status")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id_Masuk");
-
-                    b.HasIndex("KodeBarang1");
-
-                    b.ToTable("Tb_Masuk");
-                });
-
             modelBuilder.Entity("Inventory1.Models.DataBarang", b =>
                 {
                     b.Property<string>("KodeBarang")
                         .HasColumnType("varchar(767)");
 
                     b.Property<string>("Kategori")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("NamaBarang")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<int>("Stok")
                         .HasColumnType("int");
 
                     b.Property<string>("status")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("KodeBarang");
@@ -101,12 +46,35 @@ namespace Inventory1.Migrations
                         .HasColumnType("varchar(767)");
 
                     b.Property<string>("Kategori")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("id_kategori");
 
                     b.ToTable("Tb_Kategori");
+                });
+
+            modelBuilder.Entity("Inventory1.Models.Db_BarangKeluar", b =>
+                {
+                    b.Property<string>("Id_Keluar")
+                        .HasColumnType("varchar(767)");
+
+                    b.Property<int>("Jumlah")
+                        .HasColumnType("int");
+
+                    b.Property<string>("KodeBarang")
+                        .HasColumnType("varchar(767)");
+
+                    b.Property<string>("NamaBarang")
+                        .HasColumnType("text");
+
+                    b.Property<string>("status")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id_Keluar");
+
+                    b.HasIndex("KodeBarang");
+
+                    b.ToTable("Tb_BarangKeluar");
                 });
 
             modelBuilder.Entity("Inventory1.Models.Db_BarangMasuk", b =>
@@ -118,7 +86,7 @@ namespace Inventory1.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("KodeBarang")
-                        .HasColumnType("text");
+                        .HasColumnType("varchar(767)");
 
                     b.Property<string>("NamaBarang")
                         .HasColumnType("text");
@@ -127,6 +95,8 @@ namespace Inventory1.Migrations
                         .HasColumnType("text");
 
                     b.HasKey("Id_Masuk");
+
+                    b.HasIndex("KodeBarang");
 
                     b.ToTable("Tb_BarangMasuk");
                 });
@@ -165,22 +135,22 @@ namespace Inventory1.Migrations
                     b.ToTable("Tb_User");
                 });
 
-            modelBuilder.Entity("Inventory1.Models.BarangKeluar", b =>
+            modelBuilder.Entity("Inventory1.Models.Db_BarangKeluar", b =>
                 {
-                    b.HasOne("Inventory1.Models.DataBarang", "KodeBarang")
+                    b.HasOne("Inventory1.Models.DataBarang", "KodeBrg")
                         .WithMany()
-                        .HasForeignKey("KodeBarang1");
+                        .HasForeignKey("KodeBarang");
 
-                    b.Navigation("KodeBarang");
+                    b.Navigation("KodeBrg");
                 });
 
-            modelBuilder.Entity("Inventory1.Models.BarangMasuk", b =>
+            modelBuilder.Entity("Inventory1.Models.Db_BarangMasuk", b =>
                 {
-                    b.HasOne("Inventory1.Models.DataBarang", "KodeBarang")
+                    b.HasOne("Inventory1.Models.DataBarang", "KodeBrg")
                         .WithMany()
-                        .HasForeignKey("KodeBarang1");
+                        .HasForeignKey("KodeBarang");
 
-                    b.Navigation("KodeBarang");
+                    b.Navigation("KodeBrg");
                 });
 
             modelBuilder.Entity("Inventory1.Models.User", b =>

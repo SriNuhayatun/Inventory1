@@ -10,7 +10,7 @@ namespace Inventory1.Models
     {
         [Key]
         public string id_kategori { get; set; }
-        [Required]
+       
         public string Kategori { get; set; }
         
     }

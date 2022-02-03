@@ -43,6 +43,21 @@
                                 <span>Dashboard</span>
                             </a>
                         </li>
+                        <li class="sidebar-item  has-sub">
+                            <a href="#" class='sidebar-link'>
+                                <i class="bi bi-person-badge-fill"></i>
+                                <span>Profil</span>
+                            </a>
+                            <ul class="submenu ">
+                                <li class="submenu-item ">
+                                    <a asp-controller="Akun" asp-action="Masuk">Login</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a asp-controller="Akun" asp-action="Daftar">Register</a>
+                                </li>
+                            </ul>                          
+                        </li>
+                       
 
                         <li class="sidebar-item  has-sub">
                             <a href="#" class='sidebar-link'>
@@ -56,7 +71,7 @@
                                 <li class="submenu-item ">
                                     <a asp-controller="DataKategori" asp-action="TampilKategori">Data Kategori</a>
                                 </li>
-                               
+
                             </ul>
                         </li>
                         <li class="sidebar-item  has-sub">
