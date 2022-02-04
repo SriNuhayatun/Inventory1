@@ -15,7 +15,7 @@ namespace Inventory1.Controllers
         private readonly AppDbContext _context;
         public AkunController(AppDbContext context)
         {
-            _context = context;//_Context dimasukan konstruktor agar lebih ringkas
+            _context = context;
         }
         public IActionResult Daftar()
         {
@@ -27,13 +27,9 @@ namespace Inventory1.Controllers
         {
             var deklarRole = _context.Tb_Roles.Where(x => x.Id == "1").FirstOrDefault();
             datanya.Roles = deklarRole;
-            _context.Add(datanya);//sama saja dengan insert into tb_User
-            await _context.SaveChangesAsync();// eksekusi
-
-            //cara 1
-            return RedirectToAction("Masuk");//menarik ke action
-            //cara 2
-            //return RedirectToAction(controllerName: "Akun" actionName: "Masuk"); 
+            _context.Add(datanya);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Masuk");
         }
 
         public IActionResult Masuk()
@@ -44,23 +40,12 @@ namespace Inventory1.Controllers
         [HttpPost]
         public async Task<IActionResult> Masuk(User datanya)
         {
-
-            //var cari = _context.Tb_User.Where(bebas =>  //proses pencarian
-            //                                  bebas.Username == datanya.Username
-            //                                  &&
-            //                                  bebas.Password == datanya.Password
-            //).FirstOrDefault();//hanya dapat 1 data
-
-            var cariusername = _context.Tb_User.Where(bebas =>  //proses pencarian
+            var cariusername = _context.Tb_User.Where(bebas =>  
                                                bebas.Username == datanya.Username
              ).FirstOrDefault();
-            //var caripassword = _context.Tb_User.Where(bebas =>  //proses pencarian
-            //                                   bebas.Password == datanya.Password
-            // ).FirstOrDefault();
-
             if (cariusername != null)
             {
-                var cekpassword = _context.Tb_User.Where(bebas =>  //proses pencarian
+                var cekpassword = _context.Tb_User.Where(bebas =>  
                                                 bebas.Username == datanya.Username
                                                 &&
                                                 bebas.Password == datanya.Password
@@ -69,43 +54,30 @@ namespace Inventory1.Controllers
 
                 if (cekpassword != null)
                 {
-                    //proses tampungan data 
+
                     var daftar = new List<Claim>
                     {
                         new Claim("Username",cariusername.Username),
                         new Claim("Role",cariusername.Roles.Id)
                     };
-
-                    //proses daftar auth
                     await HttpContext.SignInAsync(
                         new ClaimsPrincipal(
                             new ClaimsIdentity(daftar, "Cookie", "Username", "Role")
                         )
                    );
 
-                    if (cariusername.Roles.Id == "1")//admin
+                    if (cariusername.Roles.Id == "1")
                     {
                         return RedirectToAction(controllerName: "Home", actionName: "Index");
                     }
-                    //user
-                    return RedirectToAction(controllerName: "Akun", actionName: "Daftar");
+                    return RedirectToAction(controllerName: "Home", actionName: "Index");
                 }
                 ViewBag.pesan = "password salah";
                 return View(datanya);
             }
             ViewBag.pesan = "Username salah";
             return View(datanya);
-
-            //if (cari != null)
-            //{
-            //    return RedirectToAction(controllerName: "Blog", actionName:"Index");
-            //}
-            //return View(datanya);
-
         }
-
-        //tugas
-        //cari tahu kalu misal username dan password tidak tersedia
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync();

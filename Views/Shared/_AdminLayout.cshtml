@@ -1,4 +1,5 @@
-﻿
+﻿@using Inventory1.Helper;
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -38,7 +39,7 @@
                         <li class="sidebar-title">Menu</li>
 
                         <li class="sidebar-item active ">
-                            <a href="index.html" class='sidebar-link'>
+                            <a asp-controller="Home" asp-action="Index" class='sidebar-link'>
                                 <i class="bi bi-grid-fill"></i>
                                 <span>Dashboard</span>
                             </a>
@@ -55,23 +56,9 @@
                                 <li class="submenu-item ">
                                     <a asp-controller="Akun" asp-action="Daftar">Register</a>
                                 </li>
-                            </ul>                          
-                        </li>
-                       
-
-                        <li class="sidebar-item  has-sub">
-                            <a href="#" class='sidebar-link'>
-                                <i class="bi bi-stack"></i>
-                                <span>Master Data</span>
-                            </a>
-                            <ul class="submenu ">
                                 <li class="submenu-item ">
-                                    <a asp-controller="DataBarang" asp-action="Tampil">DataBarang</a>
+                                    <a asp-controller="Akun" asp-action="Logout">Logout</a>
                                 </li>
-                                <li class="submenu-item ">
-                                    <a asp-controller="DataKategori" asp-action="TampilKategori">Data Kategori</a>
-                                </li>
-
                             </ul>
                         </li>
                         <li class="sidebar-item  has-sub">
@@ -81,18 +68,16 @@
                             </a>
                             <ul class="submenu ">
                                 <li class="submenu-item ">
+                                    <a asp-controller="DataBarang" asp-action="Tampil">DataBarang</a>
+                                </li>
+                                <li class="submenu-item ">
                                     <a asp-controller="BarangMasuk" asp-action="TampilMasuk">Data Barang Masuk</a>
                                 </li>
                                 <li class="submenu-item ">
                                     <a asp-controller="BarangKeluar" asp-action="TampilKeluar">Data Barang Keluar</a>
                                 </li>
+
                             </ul>
-                        </li>
-                        <li class="sidebar-item  ">
-                            <a href="application-gallery.html" class='sidebar-link'>
-                                <i class="bi bi-image-fill"></i>
-                                <span>Photo Gallery</span>
-                            </a>
                         </li>
                     </ul>
                 </div>
@@ -106,12 +91,12 @@
                 </a>
             </header>
             <div class="page-content">
-                    @RenderBody()
+                @RenderBody()
             </div>
             <footer>
                 <div class="footer clearfix mb-0 text-muted">
                     <div class="float-start">
-                        <p>2021 &copy; Mazer</p>
+                        <p>2022 &copy; Mazer</p>
                     </div>
                     <div class="float-end">
                         <p>

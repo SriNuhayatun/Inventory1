@@ -3,63 +3,79 @@
 @{
     Layout = "_AdminLayout";
 }
-<section class="section">
-    <div class="card">
-        <div class="card-header">
-            <P>Data Barang</P>
-            <a asp-action="Create">Tambah</a>
-        </div>
-
-        <div class="card-body">
-            <table class="table table-striped" id="table1">
-                <thead>
-                    <tr>
-                        <th>
-                            @Html.DisplayNameFor(model => model.KodeBarang)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Kategori)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.NamaBarang)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.status)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Stok)
-                        </th>
-                    </tr>
-
-                </thead>
-                <tbody>
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.KodeBarang)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Kategori)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.NamaBarang)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.status)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Stok)
-                            </td>
-                            @*<td>
-                                <a asp-action="Edit" asp-route-id="@item.KodeBarang">Edit</a>
-                                <a asp-action="Details" asp-route-id="@item.KodeBarang">Details</a>
-                                <a asp-action="Delete" asp-route-id="@item.KodeBarang">Delete</a>
-                            </td>*@
-                        </tr>
-                    }
-                </tbody>
-            </table>
+<div class="page-heading">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-12 col-md-6 order-md-1 order-last">
+                <h3>Data Barang</h3>
+            </div>
+            <div class="col-12 col-md-6 order-md-2 order-first">
+                <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Dashboard</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">@*Data Barang*@</li>
+                    </ol>
+                </nav>
+            </div>
         </div>
     </div>
-</section>
+    <section class="section">
+        <div class="card">
+            <div class="card-header">
+                <a asp-action="Create">Tambah</a>
+            </div>
+
+            <div class="card-body">
+                <table class="table table-striped" id="table1">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.KodeBarang)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Kategori)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.NamaBarang)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.status)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Stok)
+                            </th>
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.KodeBarang)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Kategori)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.NamaBarang)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.status)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Stok)
+                                </td>
+                                @*<td>
+                                        <a asp-action="Edit" asp-route-id="@item.KodeBarang">Edit</a>
+                                        <a asp-action="Details" asp-route-id="@item.KodeBarang">Details</a>
+                                        <a asp-action="Delete" asp-route-id="@item.KodeBarang">Delete</a>
+                                    </td>*@
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+</div>

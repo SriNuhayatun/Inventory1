@@ -1,4 +1,5 @@
 ﻿using Inventory1.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -7,13 +8,14 @@ using System.Threading.Tasks;
 
 namespace Inventory1.Controllers
 {
+    [Authorize]
     public class BarangKeluarController : Controller
     {
         private readonly AppDbContext _context;
 
         public BarangKeluarController(AppDbContext context)
         {
-            _context = context;//_Context dimasukan konstruktor agar lebih ringkas
+            _context = context;
         }
         public IActionResult TampilKeluar()
         {
@@ -22,15 +24,14 @@ namespace Inventory1.Controllers
 
             return View(SemuaBlog);
         }
-        public IActionResult CreateKeluar()//UNTUK MENAMPILKAN HALAMAN YANG AKAN DIISI(kolom inputan)
+        public IActionResult CreateKeluar()
         {
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateKeluar(BarangKeluarForm datanya)//mnerima halaman yg akan diisi(inputan/proses)
+        public async Task<IActionResult> CreateKeluar(BarangKeluarForm datanya)
         {
-            //proses masukan ke database
             if (ModelState.IsValid)
             {
                 var get = new Db_BarangKeluar
@@ -42,8 +43,8 @@ namespace Inventory1.Controllers
                     status = datanya.status
                 };
 
-                _context.Add(get);//mengganti dari insert into
-                await _context.SaveChangesAsync();// menyimpan perubahan
+                _context.Add(get);
+                await _context.SaveChangesAsync();
 
                 return RedirectToAction("TampilKeluar");
             }

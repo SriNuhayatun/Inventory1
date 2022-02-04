@@ -1,4 +1,5 @@
 ﻿using Inventory1.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,13 +11,14 @@ using System.Threading.Tasks;
 
 namespace Inventory1.Controllers
 {
+    [Authorize]
     public class BarangMasukController : Controller
     {
         private readonly AppDbContext _context;
        
         public BarangMasukController(AppDbContext context)
         {
-            _context = context;//_Context dimasukan konstruktor agar lebih ringkas
+            _context = context;
         }
         public IActionResult TampilMasuk()
         {
@@ -25,15 +27,14 @@ namespace Inventory1.Controllers
                 
             return View(SemuaBlog);
         }
-        public IActionResult CreateMasuk()//UNTUK MENAMPILKAN HALAMAN YANG AKAN DIISI(kolom inputan)
+        public IActionResult CreateMasuk()
         {
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateMasuk(BarangMasukForm datanya )//mnerima halaman yg akan diisi(inputan/proses)
+        public async Task<IActionResult> CreateMasuk(BarangMasukForm datanya )
         {
-            //proses masukan ke database
             if (ModelState.IsValid)
             {
                 var get = new Db_BarangMasuk
@@ -45,8 +46,8 @@ namespace Inventory1.Controllers
                     status = datanya.status
                 };
 
-                _context.Add(get);//mengganti dari insert into
-                await _context.SaveChangesAsync();// menyimpan perubahan
+                _context.Add(get);
+                await _context.SaveChangesAsync();
 
                 return RedirectToAction("TampilMasuk");
             }

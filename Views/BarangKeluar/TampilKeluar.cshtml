@@ -3,61 +3,76 @@
 @{
     Layout = "_AdminLayout";
 }
-<section class="section">
-    <div class="card">
-        <div class="card-header">
-            <P>Data Barang Masuk</P>
-            <a asp-action="CreateKeluar">Tambah</a>
-        </div>
-
-        <div class="card-body">
-            <table class="table table-striped" id="table1">
-                <thead>
-                    <tr>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Id_Keluar)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.KodeBarang)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.NamaBarang)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Jumlah)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.status)
-                        </th>
-
-                    </tr>
-
-                </thead>
-                <tbody>
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Id_Keluar)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.KodeBarang)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.NamaBarang)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Jumlah)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.status)
-                            </td>
-
-                        </tr>
-                    }
-                </tbody>
-            </table>
+<div class="page-heading">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-12 col-md-6 order-md-1 order-last">
+                <h3>Data Barang Keluar</h3>
+            </div>
+            <div class="col-12 col-md-6 order-md-2 order-first">
+                <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Dashboard</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Data Keluar</li>
+                    </ol>
+                </nav>
+            </div>
         </div>
     </div>
-</section>
+    <section class="section">
+        <div class="card">
+            <div class="card-header">
+                <a asp-action="CreateKeluar">Tambah</a>
+            </div>
 
+            <div class="card-body">
+                <table class="table table-striped" id="table1">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Id_Keluar)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.KodeBarang)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.NamaBarang)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Jumlah)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.status)
+                            </th>
+
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Id_Keluar)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.KodeBarang)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.NamaBarang)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Jumlah)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.status)
+                                </td>
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+</div>

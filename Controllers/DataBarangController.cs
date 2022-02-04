@@ -1,4 +1,5 @@
 ﻿using Inventory1.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -7,36 +8,35 @@ using System.Threading.Tasks;
 
 namespace Inventory1.Controllers
 {
+    [Authorize]
     public class DataBarangController : Controller
     {
         private readonly AppDbContext _context;
 
         public DataBarangController(AppDbContext context)
         {
-            _context = context;//_Context dimasukan konstruktor agar lebih ringkas
+            _context = context;
         }
 
         public IActionResult Tampil()
         {
 
-            var SemuaBlog = _context.Tb_Barang.ToList();//sama saja dengan select * from tb_blog
+            var SemuaBlog = _context.Tb_Barang.ToList();
             return View(SemuaBlog);
 
         }
 
-        public IActionResult Create()//UNTUK MENAMPILKAN HALAMAN YANG AKAN DIISI(kolom inputan)
+        public IActionResult Create()
         {
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Create(DataBarang Parameter)//mnerima halaman yg akan diisi(inputan/proses)
+        public async Task<IActionResult> Create(DataBarang Parameter)
         {
-
-            //proses masukan ke database
             if (ModelState.IsValid)
             {
-                _context.Add(Parameter);//mengganti dari insert into
-                 await _context.SaveChangesAsync();// menyimpan perubahan
+                _context.Add(Parameter);
+                 await _context.SaveChangesAsync();
 
                 return RedirectToAction("Tampil");
             }
