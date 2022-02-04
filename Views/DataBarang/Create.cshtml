@@ -1,4 +1,4 @@
-﻿@model DataBarang;
+﻿@model Db_DataBarang;
 
 @{
     Layout = "_AdminLayout";
@@ -14,13 +14,13 @@
                 <form asp-action="Create" class="form form-horizontal" >
                     <div class="form-body">
                         <div class="row">
-                            <div class="col-md-4">
+                            @*<div class="col-md-4">
                                 <label asp-for="KodeBarang">Kode Barang</label>
                             </div>
                             <div class="col-md-8 form-group">
                                 <input asp-for="KodeBarang" id="first-name" class="form-control"
                                        placeholder="kode Barang">
-                            </div>
+                            </div>*@
                             <div class="col-md-4">
                                 <label asp-for="Kategori">Kategori</label>
                             </div>

@@ -15,7 +15,7 @@ namespace Inventory1.Models
 
         public virtual DbSet<Roles> Tb_Roles { get; set; }
         public virtual DbSet<User> Tb_User { get; set; }
-        public virtual DbSet<DataBarang> Tb_Barang { get; set; }
+        public virtual DbSet<Db_DataBarang> Tb_Barang { get; set; }
         public virtual DbSet<Db_BarangKeluar> Tb_BarangKeluar { get; set; }
         public virtual DbSet<Db_BarangMasuk> Tb_BarangMasuk { get; set; }
     }

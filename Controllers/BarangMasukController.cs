@@ -35,6 +35,19 @@ namespace Inventory1.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateMasuk(BarangMasukForm datanya )
         {
+            string[] Id = _context.Tb_BarangMasuk.Select(x => x.Id_Masuk).ToArray();
+
+            int temp;
+            foreach (var item in Id)
+            {
+                temp = Int32.Parse(item.Split("-")[1]);
+                datanya.Id_Masuk = "M00-" + (temp + 1);
+            }
+
+            if (datanya.Id_Masuk == null)
+            {
+                datanya.Id_Masuk = "M00-1";
+            }
             if (ModelState.IsValid)
             {
                 var get = new Db_BarangMasuk

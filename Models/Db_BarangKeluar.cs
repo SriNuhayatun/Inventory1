@@ -21,6 +21,6 @@ namespace Inventory1.Models
         public string status { get; set; }
 
         [ForeignKey("KodeBarang")]
-        public DataBarang KodeBrg { get; set; }
+        public Db_DataBarang KodeBrg { get; set; }
     }
 }

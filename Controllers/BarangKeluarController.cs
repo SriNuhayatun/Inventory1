@@ -32,6 +32,19 @@ namespace Inventory1.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateKeluar(BarangKeluarForm datanya)
         {
+            string[] Id = _context.Tb_BarangKeluar.Select(x => x.Id_Keluar).ToArray();
+
+            int temp;
+            foreach (var item in Id)
+            {
+                temp = Int32.Parse(item.Split("-")[1]);
+                datanya.Id_Keluar = "M00-" + (temp + 1);
+            }
+
+            if (datanya.Id_Keluar == null)
+            {
+                datanya.Id_Keluar = "K00-1";
+            }
             if (ModelState.IsValid)
             {
                 var get = new Db_BarangKeluar

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Inventory1.Models
 {
-    public class DataBarang
+    public class Db_DataBarang
     {
         [Key]
         public string KodeBarang { get; set; }

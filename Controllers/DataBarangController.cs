@@ -31,18 +31,41 @@ namespace Inventory1.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Create(DataBarang Parameter)
+        public async Task<IActionResult> Create(DataBarangForm Parameter)
         {
+            string[] Id = _context.Tb_Barang.Select(x => x.KodeBarang).ToArray();
+
+            int temp;
+            foreach (var item in Id)
+            {
+                temp = Int32.Parse(item.Split("-")[1]);
+                Parameter.KodeBarang = "B00-" + (temp + 1);
+            }
+
+            if (Parameter.KodeBarang == null)
+            {
+                Parameter.KodeBarang = "B00-1";
+            }
+
+            var get = new Db_DataBarang
+            {
+
+                KodeBarang = Parameter.KodeBarang,
+                Kategori = Parameter.Kategori,
+                NamaBarang = Parameter.NamaBarang,
+                status = Parameter.status,
+                Stok = Parameter.Stok
+            };
+
             if (ModelState.IsValid)
             {
-                _context.Add(Parameter);
+              
+                _context.Add(get);
                  await _context.SaveChangesAsync();
 
                 return RedirectToAction("Tampil");
             }
             return View(Parameter);
-
-
         }
     }
 }
